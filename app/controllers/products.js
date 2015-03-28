@@ -17,6 +17,7 @@ var Products = function () {
   };
 
   this.create = function (req, resp, params) {
+    console.log(params);
     var self = this
       , product = geddy.model.Product.create(params);
 
