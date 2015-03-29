@@ -1,0 +1,30 @@
+<div>
+<h3>Billing</h3>
+    <% if (products) { %>
+<% for (var i = 0, ii = products.length; i < ii; i++) { %>
+  <div class="row list-item" id="product-<%= products[i].id; %>">
+    <div class="span10" style = "position:relative">
+        
+        <h3><%= products[i].name %></h3>
+        <div>
+            <span>Remaining Quantity : </span>
+            <span><%= products[i].quantity; %></span>
+      </div>
+      <div>
+            <span>Product ID : </span>
+            <span><%= products[i].productId; %></span>
+      </div>
+        <div>
+            <span>Expiry Date : </span>
+            <span><%= products[i].expiryDate.getDate(); %>/<%= products[i].expiryDate.getMonth()+1; %>/<%= products[i].expiryDate.getFullYear(); %></span>
+      </div>
+            
+        <div class="form-actions">
+           <%- contentTag('button', 'Bill this Item', {type: 'submit', formaction: 'deduct' + products[i].id, formmethod: 'POST', class: 'btn btn-right'}) %>
+        </div>
+        
+      </div>
+    </div>
+    <% } } %>
+    
+</div>

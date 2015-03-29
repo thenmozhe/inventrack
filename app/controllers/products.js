@@ -45,6 +45,29 @@ var Products = function () {
    
   };
 
+    this.billProduct = function(req, resp, params){
+       var self = this;
+        geddy.model.Product.all(function(err, products) {
+          if (err) {
+            throw err;
+          }
+          self.respondWith(products, {type:'Product'});
+        });
+
+    };
+    
+    this.deduct = function(req, resp, params){
+       var self = this;
+        console.log("Billing product");
+        geddy.model.Product.all(function(err, products) {
+          if (err) {
+            throw err;
+          }
+          self.respondWith(products, {type:'Product'});
+        });
+
+    };
+    
   this.create = function (req, resp, params) {
     var self = this;
 
