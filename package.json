@@ -4,7 +4,7 @@
   "dependencies": {
     "geddy": "0.11.x",
     "mongodb": "1.x",
-    "nodemailer":"0.7"
+    "nodemailer":"1.0"
   },
   "engines": {
     "node": "0.10.x",
