@@ -72,7 +72,8 @@ var Products = function () {
       , product = geddy.model.Product.create({
         name : params.name,
         quantity : params.quantity,
-        expiryDate : params.expiryDate
+        expiryDate : params.expiryDate,
+        productId : params.productId
       });
 
     if (!product.isValid()) {
