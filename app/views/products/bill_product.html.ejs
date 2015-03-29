@@ -1,30 +1,50 @@
 <div>
 <h3>Billing</h3>
+    <div class = "row">
+    <div class = "span8">
+    
+        <form id="product-form" class="form-horizontal" action="addCart" method="GET">
+            <div class="control-group">
+              <label for="id" class="control-label">Product ID</label>
+              <div class="controls">
+                <%- contentTag('input', '', {type:'text', class:'span4', name:'id'}) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="quantity" class="control-label">Quantity</label>
+              <div class="controls">
+                <%- contentTag('input', '', {type:'number', class:'span4', name:'quantity'}) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <%- contentTag('input', 'Add to Cart', {type:'submit', class:'span4'}) %>
+              </div>
+            </div>
+        </form>
+        
+        <script type = "text/javascript">
+        
+            
+            
+        </script>
+        
+    </div>
+    <div class = "span4">
     <% if (products) { %>
 <% for (var i = 0, ii = products.length; i < ii; i++) { %>
   <div class="row list-item" id="product-<%= products[i].id; %>">
-    <div class="span10" style = "position:relative">
+    <div class="span4">
         
-        <h3><%= products[i].name %></h3>
+        <h3><%= products[i].id %></h3>
         <div>
             <span>Remaining Quantity : </span>
             <span><%= products[i].quantity; %></span>
       </div>
-      <div>
-            <span>Product ID : </span>
-            <span><%= products[i].productId; %></span>
-      </div>
-        <div>
-            <span>Expiry Date : </span>
-            <span><%= products[i].expiryDate.getDate(); %>/<%= products[i].expiryDate.getMonth()+1; %>/<%= products[i].expiryDate.getFullYear(); %></span>
-      </div>
-            
-        <div class="form-actions">
-           <%- contentTag('button', 'Bill this Item', {type: 'submit', formaction: 'deduct' + products[i].id, formmethod: 'POST', class: 'btn btn-right'}) %>
-        </div>
-        
+             
       </div>
     </div>
     <% } } %>
-    
+    </div>
+    </div>
 </div>

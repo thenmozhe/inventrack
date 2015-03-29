@@ -56,6 +56,24 @@ var Products = function () {
 
     };
     
+    this.addCart = function(req, resp, params){
+        var self = this;
+        
+        geddy.model.Product.first(params.id, function(err, product) {
+              if (err) {
+                throw err;
+              }
+              if (!product) {
+                throw new geddy.errors.NotFoundError();
+              }
+              else {
+                geddy.cartItems.push(product);
+                self.respondWith(geddy.cartItems, {type:'Product'});
+              }
+        });
+        
+    };
+    
     this.deduct = function(req, resp, params){
        var self = this;
         console.log("Billing product");

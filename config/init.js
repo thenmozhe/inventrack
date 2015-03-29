@@ -13,6 +13,8 @@ var init = function(cb) {
     });
   }
   cb();
+    
+    geddy.cartItems = [];
 };
 
 exports.init = init;
