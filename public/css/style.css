@@ -63,3 +63,23 @@ code {
   }
 }
 
+.section-icon{
+    width: 150px;
+  margin-left: 100px;
+  margin-right: auto;
+  background: white;
+  border: 20px solid white;
+  border-radius: 10px;
+    padding-left : 15px;
+    display: inline-block;
+}
+
+.item-warning-bubble{
+  background: rgba(255,0,0,1) !important;
+  padding: 4px !important;
+  border-radius: 10px;
+  opacity: 0.8;
+  position: absolute;
+  top: 0px;
+  right: -120px;
+}

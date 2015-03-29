@@ -1,7 +1,46 @@
 var Products = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
+    
+    this.sendMail = function(req, resp,pms){
+        var self = this;
+        console.log("Initiating mail...");
+        geddy.mailer.sendMail({
+            from: "noreply@inventtrack.com"
+            , to: 'anmmagics@gmail.com'
+            , subject: "Procurement Required"
+            , text: "We require these products"
+            }, function(err, info) {
+              console.log(info);
+              if (err) {
+                throw err;
+              }
+              geddy.model.Product.first(pms.id, function(err, product) {
+              if (err) {
+                throw err;
+              }
+            
+            pms.isOrderPlaced = true;
+              product.updateProperties(pms);
 
-  this.index = function (req, resp, params) {
+              if (!product.isValid()) {
+                self.respondWith(product);
+              }
+              else {
+                product.save(function(err, data) {
+                  if (err) {
+                    throw err;
+                  }
+                  self.respondWith(product);
+                });
+              }
+            });
+            });
+            
+        
+        
+    };
+    
+    this.index = function (req, resp, params) {
     var self = this;
 
     geddy.model.Product.all(function(err, products) {
@@ -12,14 +51,17 @@ var Products = function () {
     });
   };
 
-  this.add = function (req, resp, params) {
+  this.add = function (req, resp, params) { 
     this.respond({params: params});
   };
 
   this.create = function (req, resp, params) {
-    console.log(params);
     var self = this
-      , product = geddy.model.Product.create(params);
+      , product = geddy.model.Product.create({
+        name : params.name,
+        quantity : params.quantity,
+        expiryDate : params.expiryDate
+      });
 
     if (!product.isValid()) {
       this.respondWith(product);
@@ -68,7 +110,7 @@ var Products = function () {
 
   this.update = function (req, resp, params) {
     var self = this;
-
+      
     geddy.model.Product.first(params.id, function(err, product) {
       if (err) {
         throw err;
@@ -109,7 +151,7 @@ var Products = function () {
       }
     });
   };
-
+    
 };
 
 exports.Products = Products;

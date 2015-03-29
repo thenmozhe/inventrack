@@ -43,6 +43,16 @@ var config = {
   , key: 'sid'
   , expiry: 14 * 24 * 60 * 60
   }
+  ,mailer : {
+    fromAddressUserName : 'noreply',
+    transport : {
+        service : 'Gmail',
+        auth : {
+            user : 'invent.track@gmail.com',
+            pass : 'track.invent'
+            }
+        }
+      }
 };
 
 module.exports = config;
