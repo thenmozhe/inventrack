@@ -64,17 +64,16 @@ var Products = function () {
   };
 
   this.add = function (req, resp, params) { 
-    var self = this
-    geddy.model.Product.all(function(err, products) {
-     params.productId = 100000 +(products.length+1);
-     console.log("before save::::::"+data);
-     //self.respondWith(products);
+    var self = this;
       self.respond({params: params});
     });
    
   };
 
   this.create = function (req, resp, params) {
+    geddy.model.Product.all(function(err, products) {
+     params.productId = 100000 +(products.length+1);
+    });
     console.log("Create product id::::::::"+params.productId);
     var self = this
       , product = geddy.model.Product.create({
