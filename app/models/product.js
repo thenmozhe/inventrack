@@ -40,10 +40,12 @@ var Product = function () {
 Product = geddy.model.register('Product', Product);
 
 Product.on('beforeSave',function(data){
+
     var self = this;
    geddy.model.Product.all(function(err, products) {
      data.productId = 100000 +(products.length+1);
-     self.respondWith(products);
+     console.log("before save::::::"+data);
+     //self.respondWith(products);
     });
 });
 
