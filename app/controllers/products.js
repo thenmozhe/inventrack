@@ -68,6 +68,7 @@ var Products = function () {
   };
 
   this.create = function (req, resp, params) {
+    console.log("Create product id::::::::"+params.productId);
     var self = this
       , product = geddy.model.Product.create({
         name : params.name,
