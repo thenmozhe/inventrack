@@ -3,53 +3,29 @@ var Products = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
     
     this.sendMail = function(req, resp,pms){
-        var self = this;
-        console.log("Initiating mail...");
+    var self = this;
+    console.log("Initiating mail...");
+    console.log('Message sent: ' + info.response);
+    geddy.model.Product.first(pms.id, function(err, product) {
+      if (err) {
+        throw err;
+      }
+      
+      pms.isOrderPlaced = true;
+        product.updateProperties(pms);
 
-        var transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: 'invent.track@gmail.com',
-                pass: 'track.invent'
+        if (!product.isValid()) {
+          self.respondWith(product);
+        }
+        else {
+          product.save(function(err, data) {
+            if (err) {
+              throw err;
             }
-        });
-
-        var mailOptions = {
-            from: "noreply@inventtrack.com"
-            , to: 'anmmagics@gmail.com'
-            , subject: "Procurement Required"
-            , text: "We require these products"
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-            if(error){
-                console.log(error);
-            }else{
-                console.log('Message sent: ' + info.response);
-                geddy.model.Product.first(pms.id, function(err, product) {
-                    if (err) {
-                      throw err;
-                    }
-                  
-                  pms.isOrderPlaced = true;
-                    product.updateProperties(pms);
-
-                    if (!product.isValid()) {
-                      self.respondWith(product);
-                    }
-                    else {
-                      product.save(function(err, data) {
-                        if (err) {
-                          throw err;
-                        }
-                        self.respondWith(product);
-                      });
-                    }
-                  });
-            }
-        });
-        
-        
+            self.respondWith(product);
+          });
+        }
+      });
     };
     
     this.index = function (req, resp, params) {
@@ -78,8 +54,6 @@ var Products = function () {
      params.productId = 100000 +(products.length+1);
 
       console.log("Create product id::::::::"+params.productId);
-    
-
      
       var product = geddy.model.Product.create({
         name : params.name,
