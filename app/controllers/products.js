@@ -71,10 +71,14 @@ var Products = function () {
 
   this.create = function (req, resp, params) {
     geddy.model.Product.all(function(err, products) {
+
+
      params.productId = 100000 +(products.length+1);
-    });
-    console.log("Create product id::::::::"+params.productId);
-    var self = this
+
+      console.log("Create product id::::::::"+params.productId);
+    
+
+     var self = this
       , product = geddy.model.Product.create({
         name : params.name,
         quantity : params.quantity,
@@ -93,6 +97,9 @@ var Products = function () {
         self.respondWith(product, {status: err});
       });
     }
+
+    });
+    
   };
 
   this.show = function (req, resp, params) {
