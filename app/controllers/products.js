@@ -71,7 +71,7 @@ var Products = function () {
 
   this.create = function (req, resp, params) {
     var self = this;
-    
+
     geddy.model.Product.all(function(err, products) {
 
 
@@ -81,7 +81,7 @@ var Products = function () {
     
 
      
-      , product = geddy.model.Product.create({
+      var product = geddy.model.Product.create({
         name : params.name,
         quantity : params.quantity,
         expiryDate : params.expiryDate,
