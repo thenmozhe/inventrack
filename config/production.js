@@ -1,20 +1,5 @@
 function parse_url(str, component) {
-// http://kevin.vanzonneveld.net
-// +      original by: Steven Levithan (http://blog.stevenlevithan.com)
-// + reimplemented by: Brett Zamir (http://brett-zamir.me)
-// + input by: Lorenzo Pisani
-// + input by: Tony
-// + improved by: Brett Zamir (http://brett-zamir.me)
-// + improved by: Ben Ng (http://benng.me)
-// %          note: Based on http://stevenlevithan.com/demo/parseuri/js/assets/parseuri.js
-// %          note: blog post at http://blog.stevenlevithan.com/archives/parseuri
-// %          note: demo at http://stevenlevithan.com/demo/parseuri/js/assets/parseuri.js
-// %          note: Does not replace invalid characters with '_' as in PHP, nor does it return false with
-// %          note: a seriously malformed URL.
-// %          note: Besides function name, is essentially the same as parseUri as well as our allowing
-// %          note: an extra slash after the scheme/protocol (to allow file:/// as in PHP)
-// *     example 1: parse_url('http://username:password@hostname/path?arg=value#anchor');
-// *     returns 1: {scheme: 'http', host: 'hostname', user: 'username', pass: 'password', path: '/path', query: 'arg=value', fragment: 'anchor'}
+
 var key = ['source', 'scheme', 'authority', 'userInfo', 'user', 'pass', 'host', 'port',
           'relative', 'path', 'directory', 'file', 'query', 'fragment'],
   ini = (this.php_js && this.php_js.ini) || {},
