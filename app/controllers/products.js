@@ -66,7 +66,6 @@ var Products = function () {
   this.add = function (req, resp, params) { 
     var self = this;
       self.respond({params: params});
-    });
    
   };
 
