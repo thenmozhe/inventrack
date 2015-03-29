@@ -1,41 +1,53 @@
+var nodemailer = require('nodemailer');
 var Products = function () {
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
     
     this.sendMail = function(req, resp,pms){
         var self = this;
         console.log("Initiating mail...");
-        geddy.mailer.sendMail({
+
+        var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'invent.track@gmail.com',
+                pass: 'track.invent'
+            }
+        });
+
+        var mailOptions = {
             from: "noreply@inventtrack.com"
             , to: 'anmmagics@gmail.com'
             , subject: "Procurement Required"
             , text: "We require these products"
-            }, function(err, info) {
-              console.log(info);
-              if (err) {
-                throw err;
-              }
-              geddy.model.Product.first(pms.id, function(err, product) {
-              if (err) {
-                throw err;
-              }
-            
-            pms.isOrderPlaced = true;
-              product.updateProperties(pms);
+        };
 
-              if (!product.isValid()) {
-                self.respondWith(product);
-              }
-              else {
-                product.save(function(err, data) {
-                  if (err) {
-                    throw err;
-                  }
-                  self.respondWith(product);
-                });
-              }
-            });
-            });
-            
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                console.log(error);
+            }else{
+                console.log('Message sent: ' + info.response);
+                geddy.model.Product.first(pms.id, function(err, product) {
+                    if (err) {
+                      throw err;
+                    }
+                  
+                  pms.isOrderPlaced = true;
+                    product.updateProperties(pms);
+
+                    if (!product.isValid()) {
+                      self.respondWith(product);
+                    }
+                    else {
+                      product.save(function(err, data) {
+                        if (err) {
+                          throw err;
+                        }
+                        self.respondWith(product);
+                      });
+                    }
+                  });
+            }
+        });
         
         
     };
