@@ -64,11 +64,12 @@ var Products = function () {
   };
 
   this.add = function (req, resp, params) { 
+    var self = this
     geddy.model.Product.all(function(err, products) {
      params.productId = 100000 +(products.length+1);
      console.log("before save::::::"+data);
      //self.respondWith(products);
-      this.respond({params: params});
+      self.respond({params: params});
     });
    
   };
