@@ -7,7 +7,7 @@
 <% if (products) { %>
 <% for (var i = 0, ii = products.length; i < ii; i++) { %>
   <div class="row list-item" id="product-<%= products[i].id; %>">
-    <div class="span8" style = "position:relative">
+    <div class="span10" style = "position:relative">
       <h3>
         <%- linkTo( products[i].name, editProductPath(products[i].id), {}) %></h3>
         <div>
@@ -23,9 +23,9 @@
             <span><%= products[i].expiryDate.getDate(); %>/<%= products[i].expiryDate.getMonth()+1; %>/<%= products[i].expiryDate.getFullYear(); %></span>
       </div>
         
-        <div class = "item-warning-bubble">
         <% var currentDate = new Date();
-        if(products[i].quantity < 10) { %>      
+        if(products[i].quantity < 10) { %>     
+        <div class = "item-warning-bubble">
             <span>Only <%= products[i].quantity %> items remaining. 
                 <% if(!products[i].isOrderPlaced) { %> 
                     <%- linkTo( "Click here to place order.", '/sendMail?id='+products[i].id, {}) %>
@@ -33,15 +33,19 @@
                     An Order has been placed for the items.
                 <% } %>
             </span>
+            </div>
           <% } 
         else if(products[i].expiryDate > currentDate){
-            if(Math.abs(products[i].expiryDate.getTime() - currentDate.getTime())/(1000*3600*24) <= 5) %>
+            if(Math.ceil((products[i].expiryDate.getTime() - currentDate.getTime())/(1000*3600*24)) <= 5){ %>
+        <div class = "item-warning-bubble">
             <span>Nearing Expiry Date...</span>
-        <% } 
+            </div>
+        <% } }
         else if(products[i].expiryDate < currentDate){ %>
+        <div class = "item-warning-bubble">
             <span>Item has expired!</span>
+            </div>
         <% } %>
-        </div>
     </div>
           
   </div>
