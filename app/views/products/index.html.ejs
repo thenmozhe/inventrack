@@ -1,13 +1,13 @@
-<div class="hero-unit">
-  <h2>All Products</h2>
-  <%- linkTo('Create a new Product', addProductPath, {class: 'btn pull-right'}); %>
+<div style = "padding : 40px;" class = "hero-unit">
+  <h2>Dashboard</h2>
 </div>
+<div> <%- linkTo('Add a new Product', addProductPath, {class: 'btn', style : 'margin-bottom: 25px;'}); %></div>
 
 <div id="products-list">
-<% if (products) { %>
-<% for (var i = 0, ii = products.length; i < ii; i++) { %>
-  <div class="row list-item" id="product-<%= products[i].id; %>">
-    <div class="span10" style = "position:relative">
+    <% if (products) { %>
+    <% for (var i = 0, ii = products.length; i < ii; i++) { %>
+      <div class="row list-item" id="product-<%= products[i].id; %>">
+        <div class="span10" style = "position:relative">
       <h3>
         <%- linkTo( products[i].name, editProductPath(products[i].id), {}) %></h3>
         <div>

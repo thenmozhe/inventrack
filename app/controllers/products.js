@@ -5,7 +5,6 @@ var Products = function () {
     this.sendMail = function(req, resp,pms){
     var self = this;
     console.log("Initiating mail...");
-    console.log('Message sent: ' + info.response);
     geddy.model.Product.first(pms.id, function(err, product) {
       if (err) {
         throw err;
@@ -104,7 +103,7 @@ var Products = function () {
       });
 
     if (!product.isValid()) {
-      this.respondWith(product);
+      self.respondWith(product);
     }
     else {
       product.save(function(err, data) {
