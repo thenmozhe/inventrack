@@ -1,5 +1,5 @@
 body {
-  background: url('../img/whitey.png');
+  background: url('../img/background.jpg') fixed no-repeat;
     font-family: 'Roboto', sans-serif;
 }
 body.application {
@@ -61,8 +61,7 @@ code {
   }
 }
 
-.container .hero-unit{
-    background-color: #6f5499;
+.container .hero-unit{  
 }
 
 .section-icon{
