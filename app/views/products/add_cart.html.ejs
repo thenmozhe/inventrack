@@ -1,22 +1,25 @@
-<div>
+<div style="padding:20px 0">
 <h3>Items to be Billed</h3>
-    <% if(geddy.cartItems){ %>
+</div>
+<div style="padding:20px 0 40px 0">
+    <% if(cartItems){ %>
     
     <div class="row">
     <div class = "span4" style = "font-weight : bold">Item</div>
     <div class = "span4" style = "font-weight : bold">Quantity</div>
     </div>
-    <% for (var i = 0, ii = geddy.cartItems.length; i < ii; i++){ %>
+    <% for (var i = 0, ii = cartItems.length; i < ii; i++){ %>
     <div class="row">
-     
-        <div class = "span4"><%= geddy.cartItems[i].name %></div>
-        <div class = "span4"><%= geddy.cartItems[i].quantity %></div>
-        
-    </div>  
-    
-<% } } %>`
-</div>
+        <div class = "span4"><%= cartItems[i].name %></div>
+        <div class = "span4"><%= cartItems[i].billQuantity %></div>
+    </div>
+<% } } %>
 
-<div style = "margin-top:2%">
+<div style="margin-top:20px">
+<span style = "margin-right:20px">
     <%- linkTo( "Back to Products", 'bill', {class : 'btn btn-right'}) %></h3>
+</span>
+<span>
+    <%- linkTo( "Complete Billing", 'finish', {class : 'btn btn-primary'}) %></h3>
+</span>
 </div>

@@ -14,7 +14,7 @@ var init = function(cb) {
   }
   cb();
     
-    geddy.cartItems = [];
+      cartItems=[];
 };
 
 exports.init = init;

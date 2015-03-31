@@ -1,17 +1,17 @@
 <div class="hero-unit">
   <h2 class="name"><%= product.name %></h2>
   <%- linkTo('Edit this product', editProductPath(params.id), {class: 'btn pull-right'}); %>
-  <%- linkTo('Back to list', productPath(''), {class: 'btn pull-right'}); %>
+  <%- linkTo('Back to list', productPath(''), {class: 'btn pull-right margin-right'}); %>
 </div>
-
-<h2>Product Properties</h2>
+<div style="clear:both;margin-top:80px;background:#fff">
 <% for(var i in product) { -%>
 <% if(i !== 'saved') { -%>
-<div class="row list-item">
-  <div class="span12">
-    <%= i %>
-<span class="<%= i %>"><%= product[i] %></span>
+<div class="row">
+  <div class="span12" style="padding:20px;font-weight:bold">
+    <%= i %>:
+<span class="<%= i %>" style="font-weight:normal"><%= product[i] %></span>
   </div>
   
 </div>
 <% } -%><% } -%>
+</div>
