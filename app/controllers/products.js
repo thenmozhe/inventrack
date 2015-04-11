@@ -96,13 +96,7 @@ var Products = function () {
 
     this.billProduct = function(req, resp, params){
        var self = this;
-        geddy.model.Product.all(function(err, products) {
-          if (err) {
-            throw err;
-          }
-          self.respondWith(products, {type:'Product'});
-        });
-
+       self.respond({params: params});
     };
 
     this.updateLastBill = function(lastBilledOn,lastBilledCount,billedCount){
@@ -139,6 +133,7 @@ var Products = function () {
             }
             for(var i=0; i < len; i++){
               for(var j=0;j<products.length;j++){
+                console.log(cartItems)
                 if(cartItems[i].id == products[j].id){
                   
                   params.quantity = cartItems[i].quantity;
@@ -160,14 +155,15 @@ var Products = function () {
                       if (err) {
                         throw err;
                       }
-                      cartItems = [];
-                      self.respondWith(prs,{type:'Product'});
+                      
                     });
                   }
                   break;
                 }
               }
             }
+            cartItems = [];
+            self.respondWith(prs,{type:'Product'});
           });
     };
     
@@ -186,9 +182,8 @@ var Products = function () {
           }
           addedProduct.billQuantity = params.quantity;
           addedProduct.quantity = addedProduct.quantity - params.quantity;
-          console.log("length &&&&&&&&&&& "+cartItems.length);
-          cartItems[cartItems.length]=addedProduct;
-          console.log("geddy cart items::::::" + cartItems);
+          
+          cartItems[cartItems.length]=addedProduct;          
           self.respondWith(cartItems,{type:'Product'});
         });
         
