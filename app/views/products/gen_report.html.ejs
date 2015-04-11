@@ -102,7 +102,7 @@
 <script>
 
 $(function () {
-<<<<<<< HEAD
+
     var productBrands = '<%- productBrands %>';
     productBrands = JSON.parse(productBrands);
     
@@ -145,9 +145,6 @@ $(function () {
             });
         return quantity;
     }
-    
-=======
->>>>>>> origin/master
     $('#container').highcharts({
         chart: {
             type: 'bar'
@@ -159,11 +156,9 @@ $(function () {
             text: ''
         },
         xAxis: {
-<<<<<<< HEAD
+
             categories: ['YoY - 5 months', 'Last 3 months'],
-=======
-            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
->>>>>>> origin/master
+
             title: {
                 text: null
             }
@@ -203,7 +198,6 @@ $(function () {
             enabled: false
         },
         series: [{
-<<<<<<< HEAD
             name: productBrands[0].productName,
             data: [getYoy(productBrands[0].productId), 
                    getLast(productBrands[0].productId, 3)]
@@ -224,17 +218,6 @@ $(function () {
             data: [getYoy(productBrands[4].productId), 
                    getLast(productBrands[4].productId, 3)]
             }]
-=======
-            name: 'Year 1800',
-            data: [107, 31, 635, 203, 2]
-        }, {
-            name: 'Year 1900',
-            data: [133, 156, 947, 408, 6]
-        }, {
-            name: 'Year 2008',
-            data: [973, 914, 4054, 732, 34]
-        }]
->>>>>>> origin/master
     });
 });
 </script>
