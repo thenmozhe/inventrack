@@ -130,7 +130,13 @@ $(function () {
         var quantity = 0;
         
         list.forEach(function(o){
-            if((parseInt((new Date()).getMonth()+1) - o.dateSold.split("/")[1].substring(0,2)) <= noOfMonths ){
+            //var dateDiff = parseInt((new Date()).getMonth()+1) - o.dateSold.split("/")[1].substring(0,2);
+            //var year = parseInt(o.dateSold.substring(o.dateSold.length-4, o.dateSold.length));
+            var date = new Date();
+            var soldDate = new Date(o.dateSold);
+            var dateDiff = Math.abs(soldDate.getTime() - date.getTime());
+            var diffMonths = Math.floor(dateDiff / (1000 * 3600 * 24 * 30)); 
+            if(diffMonths <= noOfMonths ){
                     if(o.productId == id){
                         quantity += o.quantity;
                     }
@@ -150,7 +156,7 @@ $(function () {
             text: ' '
         },
         xAxis: {
-            categories: ['YoY - 5 months', 'Last 3 months', 'Last 6 months'],
+            categories: ['YoY - 5 months', 'Last 3 months'],
             title: {
                 text: null
             }
@@ -192,28 +198,23 @@ $(function () {
         series: [{
             name: productBrands[0].productName,
             data: [getYoy(productBrands[0].productId), 
-                   getLast(productBrands[0].productId, 3), 
-                   getLast(productBrands[0].productId, 6)]
+                   getLast(productBrands[0].productId, 3)]
         }, {
             name: productBrands[1].productName,
             data: [getYoy(productBrands[1].productId), 
-                   getLast(productBrands[1].productId, 3), 
-                   getLast(productBrands[1].productId, 6)]
+                   getLast(productBrands[1].productId, 3)]
         }, {
             name: productBrands[2].productName,
             data: [getYoy(productBrands[2].productId), 
-                   getLast(productBrands[2].productId, 3), 
-                   getLast(productBrands[2].productId, 6)]
+                   getLast(productBrands[2].productId, 3)]
         }, {
             name: productBrands[3].productName,
             data: [getYoy(productBrands[3].productId), 
-                   getLast(productBrands[3].productId, 3), 
-                   getLast(productBrands[3].productId, 6)]
+                   getLast(productBrands[3].productId, 3)]
         }, {
             name: productBrands[4].productName,
             data: [getYoy(productBrands[4].productId), 
-                   getLast(productBrands[4].productId, 3), 
-                   getLast(productBrands[4].productId, 6)]
+                   getLast(productBrands[4].productId, 3)]
             }]
     });
 });   
