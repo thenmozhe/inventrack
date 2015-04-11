@@ -1,0 +1,31 @@
+<div class = "hero-unit">
+  <h2>Wish List</h2>
+</div>
+<div class="span10"> 
+  <%- linkTo('Add a new wish', '/addWishForm', {class: 'btn btn-primary ', style : 'margin-bottom: 45px;  float: right; margin-right:20px;'}); %>
+</div>
+
+
+<div id="products-list" style="clear:right">
+<% console.log(wishList); if (wishList.length > 0) { %>
+	<% for (var i = 0, ii = wishList.length; i < ii; i++) { %>
+	<div class="row list-item">
+       <div class="span10" style = "position:relative">
+      		<h3><%= wishList[i].name %></h3>
+	        <div>
+	            <span>Description: </span>
+	            <span><%= wishList[i].descriptiom; %></span>
+		    </div>
+		    <div>
+	            <span>Quantity : </span>
+	            <span><%= wishList[i].quantity; %></span>
+		    </div>
+	        <div>
+	            <span>Order By : </span>
+	            <span><%= wishList[i].buyDate; %></span>
+	      	</div>
+      </div>
+      </div>
+	<% } %>
+	<% } %>
+</div>

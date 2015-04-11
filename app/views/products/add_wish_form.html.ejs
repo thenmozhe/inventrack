@@ -1,0 +1,40 @@
+<div>
+<h3 style="padding:20px 0">Add Wish</h3>
+    <div class = "row">
+    <div class = "span8">
+    
+        <form id="wish-form" class="form-horizontal">
+            <div class="control-group">
+              <label for="name" class="control-label">Product Name</label>
+              <div class="controls">
+                <%- contentTag('input', '', {type:'text', class:'span4', name:'name'}) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="description" class="control-label">Description</label>
+              <div class="controls">
+                <%- contentTag('input', '', {type:'text', class:'span4', name:'description'}) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="quantity" class="control-label">Quantity</label>
+              <div class="controls">
+                <%- contentTag('input', '', {type:'number', class:'span4', name:'quantity'}) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="buyDate" class="control-label">Order by (date)</label>
+              <div class="controls">
+                <%- contentTag('input', '', {type:'date', class:'span4', name:'buyDate'}) %>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <%- contentTag('button', 'Add to Wish List', {type: 'submit', formaction: '/addWish', formmethod: 'POST', class: 'btn btn-primary'}) %>
+              </div>
+            </div>
+        </form>
+                
+    </div>
+    
+</div>

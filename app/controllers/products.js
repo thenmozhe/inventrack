@@ -1,3 +1,6 @@
+var nodemailer = require('nodemailer');
+var transport = require('nodemailer-smtp-transport');
+var CronJob = require('cron').CronJob;
 
 var Products = function () {
 
@@ -96,7 +99,13 @@ var Products = function () {
 
     this.billProduct = function(req, resp, params){
        var self = this;
-       self.respond({params: params});
+       geddy.model.Product.all(function(err, products) {
+          if (err) {
+            throw err;
+          }
+          self.respondWith(products, {type:'Product'});
+        });
+
     };
 
     this.updateLastBill = function(lastBilledOn,lastBilledCount,billedCount){
@@ -180,6 +189,7 @@ var Products = function () {
               break;
             }
           }
+
           addedProduct.billQuantity = params.quantity;
           addedProduct.quantity = addedProduct.quantity - params.quantity;
           
@@ -309,7 +319,76 @@ var Products = function () {
       }
     });
   };
+
+  this.wishList = function(req,res,params){
+    var self = this;
+      self.respond({params: params});
+  };
+
+  this.addWishForm = function(req,res,params){
+    var self = this;
+      self.respond({params: params});
+  };
     
+  this.addWish = function(req,res,params){
+    wishList[wishList.length] = params;
+
+    var job = new CronJob(new Date(params.buyDate) , function() {
+      /* runs once at the specified date. */
+      var transporter = nodemailer.createTransport(transport({
+        service: "Gmail",
+        auth: {
+            user: "invent.track@gmail.com",
+            pass: "track.invent"
+        }
+    }));
+
+    console.log("Initiating mail...");
+
+    transporter.sendMail({
+        from : "noreply@inventrack.org",
+        to : "anmmagics@gmail.com",
+        subject : "Time to order the product" + params.name,
+        text : "Product name : " + params.name + " , " + "Product Description : " + params.description + " , " + "Order by date : " + params.buyDate,
+    }, function(err, info){
+        if(err){
+            console.log("Error: " + err);
+            throw err;
+        }
+
+    });
+      }, function () {
+        /* This function is executed when the job stops */
+      },
+      true, /* Start the job right now */
+      null /* Time zone of this job. */
+    );
+
+      var transporter = nodemailer.createTransport(transport({
+        service: "Gmail",
+        auth: {
+            user: "invent.track@gmail.com",
+            pass: "track.invent"
+        }
+    }));
+
+    console.log("Initiating mail...");
+
+    transporter.sendMail({
+        from : "noreply@inventrack.org",
+        to : "anmmagics@gmail.com",
+        subject : "Time to order the product" + params.name,
+        text : "Product name : " + params.name + " , " + "Product Description : " + params.description + " , " + "Order by date : " + params.buyDate,
+    }, function(err, info){
+        if(err){
+            console.log("Error: " + err);
+            throw err;
+        }
+
+    });
+     var self = this;
+      self.respond({params: params});
+  }
 };
 
 exports.Products = Products;

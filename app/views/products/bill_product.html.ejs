@@ -29,14 +29,16 @@
 <% for (var i = 0, ii = products.length; i < ii; i++) { %>
   <div class="row list-item" id="product-<%= products[i].id; %>">
     <div class="span4">
-        
-        <h3><%= products[i].productId %></h3>
-        <div class="barCode"></div>
+        <div class="barCode" style="margin-top:20px"></div>
         <script>
         var pr = '<%= products[i].productId%>';
           $('#product-<%= products[i].id%> .barCode').barcode(pr,"code39",{barWidth:2, barHeight:50});
         </script>
         <div>
+            <span>Product Name : </span>
+            <span><%= products[i].name; %></span>
+      </div>
+      <div>
             <span>Remaining Quantity : </span>
             <span><%= products[i].quantity; %></span>
       </div>

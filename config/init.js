@@ -16,7 +16,7 @@ var init = function(cb) {
     
       cartItems=[];
       report = [];
-    
+      wishList = [];
     /* Stub - To be pushed to DB for real-time */
     
     var productBrands1 = [{productId : '100001', productName : 'Sunsilk'},

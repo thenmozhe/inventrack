@@ -4,95 +4,95 @@
 <h4 style = " margin-top : 20px;">Fast moving item</h4>
 <div style="clear:both;margin-top:0px;background:#fff">
 <% if(report.fastMovingItem){%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Name :
-		<span style="font-weight:normal"><%= report.fastMovingItem.name %></span>
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Name :
+        <span style="font-weight:normal"><%= report.fastMovingItem.name %></span>
+      </div>
+    </div>
 
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Id :
-		<span style="font-weight:normal"><%= report.fastMovingItem.productId %></span>
-	 	</div>
-	 </div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Id :
+        <span style="font-weight:normal"><%= report.fastMovingItem.productId %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Total no.of quantity billed today :
-		<span style="font-weight:normal"><%= report.fastMovingItem.lastBilledCount %></span>
-	 	</div>
-	 </div>
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Total no.of quantity billed today :
+        <span style="font-weight:normal"><%= report.fastMovingItem.lastBilledCount %></span>
+        </div>
+     </div>
 <%}else{%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   products yet to be sold!
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       products yet to be sold!
+      </div>
+    </div>
 <%}%>
 </div>
 
 <h4 style = " margin-top : 20px;">Slow moving item</h4>
 <div style="clear:both;margin-top:0px;background:#fff; position: relative;">
 <% if(report.slowMovingItem){%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Name :
-		<span style="font-weight:normal"><%= report.slowMovingItem.name %></span>
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Name :
+        <span style="font-weight:normal"><%= report.slowMovingItem.name %></span>
+      </div>
+    </div>
 
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Id :
-		<span style="font-weight:normal"><%= report.slowMovingItem.productId %></span>
-	 	</div>
-	 </div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Id :
+        <span style="font-weight:normal"><%= report.slowMovingItem.productId %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Total no.of quantity billed today :
-		<span style="font-weight:normal"><%= report.slowMovingItem.lastBilledCount %></span>
-	 	</div>
-	 </div>
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Total no.of quantity billed today :
+        <span style="font-weight:normal"><%= report.slowMovingItem.lastBilledCount %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   	Remaining Quantity : 
-		<span style="font-weight:normal"><%= report.slowMovingItem.quantity %></span>
-	 	</div>
-	 </div>
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+        Remaining Quantity : 
+        <span style="font-weight:normal"><%= report.slowMovingItem.quantity %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   	Expires on : 
-		<span style="font-weight:normal"><%= report.slowMovingItem.expiryDate %></span>
-	 	</div>
-	 </div>
-	 <% 
-	 	var currentDate = new Date();
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+        Expires on : 
+        <span style="font-weight:normal"><%= report.slowMovingItem.expiryDate %></span>
+        </div>
+     </div>
+     <% 
+        var currentDate = new Date();
         var prLife = Math.ceil((report.slowMovingItem.expiryDate.getTime() - currentDate.getTime())/(1000*3600*24));
         var prSellingRatio = report.slowMovingItem.lastBilledCount;
         var prQuantity = report.slowMovingItem.quantity;
         var dangerRatio =  Math.ceil(report.slowMovingItem.quantity / prLife);
-    	if(dangerRatio > report.slowMovingItem.lastBilledCount){%>
-    		<div class = "item-warning-bubble item-warning-bubble-animation">
-        		<span style="padding:0">Attention...</span>
-        	</div>
+        if(dangerRatio > report.slowMovingItem.lastBilledCount){%>
+            <div class = "item-warning-bubble item-warning-bubble-animation">
+                <span style="padding:0">Attention...</span>
+            </div>
         <%}%>
      <div class="row">
-	  	<div class="span12" style="padding:10px;font-weight:bold">
-	   	You've to sell <%= dangerRatio %> products per day. It expires in <%=prLife %> days!!</span>
-	 	</div>
-	 </div>
+        <div class="span12" style="padding:10px;font-weight:bold">
+        You've to sell <%= dangerRatio %> products per day. It expires in <%=prLife %> days!!</span>
+        </div>
+     </div>
 
 <%}else{%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   No more products billed!!
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       No more products billed!!
+      </div>
+    </div>
 <%}%>
 </div>
 <br/>
@@ -102,6 +102,7 @@
 <script>
 
 $(function () {
+<<<<<<< HEAD
     var productBrands = '<%- productBrands %>';
     productBrands = JSON.parse(productBrands);
     
@@ -145,18 +146,24 @@ $(function () {
         return quantity;
     }
     
+=======
+>>>>>>> origin/master
     $('#container').highcharts({
         chart: {
             type: 'bar'
         },
         title: {
-            text: 'Sale Trends - Shampoo'
+            text: 'Trendz in previous year - Shampoo'
         },
         subtitle: {
-            text: ' '
+            text: ''
         },
         xAxis: {
+<<<<<<< HEAD
             categories: ['YoY - 5 months', 'Last 3 months'],
+=======
+            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+>>>>>>> origin/master
             title: {
                 text: null
             }
@@ -196,6 +203,7 @@ $(function () {
             enabled: false
         },
         series: [{
+<<<<<<< HEAD
             name: productBrands[0].productName,
             data: [getYoy(productBrands[0].productId), 
                    getLast(productBrands[0].productId, 3)]
@@ -216,7 +224,17 @@ $(function () {
             data: [getYoy(productBrands[4].productId), 
                    getLast(productBrands[4].productId, 3)]
             }]
+=======
+            name: 'Year 1800',
+            data: [107, 31, 635, 203, 2]
+        }, {
+            name: 'Year 1900',
+            data: [133, 156, 947, 408, 6]
+        }, {
+            name: 'Year 2008',
+            data: [973, 914, 4054, 732, 34]
+        }]
+>>>>>>> origin/master
     });
-});   
-    
+});
 </script>
