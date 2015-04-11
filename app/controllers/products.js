@@ -377,7 +377,7 @@ var Products = function () {
     transporter.sendMail({
         from : "noreply@inventrack.org",
         to : "anmmagics@gmail.com",
-        subject : "Time to order the product" + params.name,
+        subject : "Time to order the product " + params.name,
         text : "Product name : " + params.name + " , " + "Product Description : " + params.description + " , " + "Order by date : " + params.buyDate,
     }, function(err, info){
         if(err){
