@@ -10,7 +10,9 @@ code {
   white-space: pre;
 }
 
-
+a{
+  color:rgb(0, 0, 139);
+}
 .margin-right{
   margin-right:20px;
 }
@@ -79,7 +81,7 @@ code {
 }
 
 .item-warning-bubble{
-  background: rgba(255,0,0,1) !important;
+  background-color: rgba(255,0,0,1) !important;
   padding: 10px !important;
   border-radius: 10px;
   opacity: 0.8;
@@ -100,4 +102,41 @@ code {
 .barCode div{
   padding:0;
   border-bottom:0 ;
+}
+
+.item-warning-bubble-animation{
+   -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    right:-10px;
+    width:10%;
+}
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
 }

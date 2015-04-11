@@ -5,7 +5,9 @@ var Product = function () {
     quantity: {type: 'number', required : true},
     expiryDate: {type: 'date',required: true},
     isOrderPlaced: {type: 'boolean'},
-    productId : {type : 'number'}     
+    productId : {type : 'number'} ,
+    lastBilledOn : {type: 'string'} ,
+    lastBilledCount : {type : 'number'}
   });
   
   this.validatesWithFunction('quantity', function (quantity) {

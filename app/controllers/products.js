@@ -2,6 +2,53 @@
 var Products = function () {
 
   this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
+
+    this.getFastMovingItem = function(products){
+        var today = new Date();
+        var todaysDate = today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear();
+        var fastMovingItem = null;
+        var pLen = products.length;
+        for(var i=0; i<pLen; i++){
+          if(products[i].lastBilledOn == todaysDate){
+            fastMovingItem = products[i];
+            if(fastMovingItem.lastBilledCount <= products[i].lastBilledCount){
+              fastMovingItem = products[i];
+            }
+          }
+        }
+        return fastMovingItem;
+    };
+
+    this.getSlowMovingItem = function(products){
+        var today = new Date();
+        var todaysDate = today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear();
+        var pLen = products.length;
+        if(pLen > 1){
+          var slowMovingItem = null;
+          for(var i=0; i<pLen; i++){
+            if(products[i].lastBilledOn == todaysDate){
+              slowMovingItem = products[i];
+              if(slowMovingItem.lastBilledCount >= products[i].lastBilledCount){
+                console.log(products[i].productId);
+                slowMovingItem = products[i];
+              }
+            }
+          }
+        }
+        return slowMovingItem;
+    }
+
+    this.genReport = function(req, res, params){
+      var self = this;
+      geddy.model.Product.all(function(err, products) {
+        if (err) {
+          throw err;
+        }
+        report.fastMovingItem = self.getFastMovingItem(products);
+        report.slowMovingItem = self.getSlowMovingItem(products);
+      });
+      self.respond(report);
+    };
     
     this.sendMail = function(req, resp,pms){
       var self = this;
@@ -58,6 +105,26 @@ var Products = function () {
 
     };
 
+    this.updateLastBill = function(lastBilledOn,lastBilledCount,billedCount){
+      var today = new Date();
+      var todaysDate = today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear();
+      if(lastBilledOn == null){
+        return {'lastBilledDate':todaysDate,'lastBilledCount':billedCount};
+      }
+      else{
+        console.log(lastBilledOn == todaysDate);
+        console.log(todaysDate);
+        if(lastBilledOn == todaysDate){
+          console.log("days match");
+          return {'lastBilledDate':todaysDate,'lastBilledCount': (lastBilledCount+billedCount)};
+        }
+        else{
+          console.log("no ,atch");
+          return {'lastBilledDate':todaysDate,'lastBilledCount':billedCount};
+        }
+      }
+    }
+
     this.finish = function(req, resp, params){
      
        var self = this;
@@ -66,10 +133,6 @@ var Products = function () {
 
         var len = cartItems.length;
 
-        console.log("SDfsdf ******************"+cartItems)
-        console.log(cartItems);
-
-        
           geddy.model.Product.all(function(err, products) {
             if (err) {
               throw err;
@@ -77,9 +140,13 @@ var Products = function () {
             for(var i=0; i < len; i++){
               for(var j=0;j<products.length;j++){
                 if(cartItems[i].id == products[j].id){
-                  console.log("product $$$$$$$$$$$"+products[j]);
                   
                   params.quantity = cartItems[i].quantity;
+
+                  var lastBillDetails = self.updateLastBill(products[j].lastBilledOn,products[j].lastBilledCount,(products[j].quantity-cartItems[i].quantity));
+
+                  params.lastBilledOn =  lastBillDetails.lastBilledDate;
+                  params.lastBilledCount = lastBillDetails.lastBilledCount;
 
                   prs[prs.length] = products[j];
 
@@ -204,6 +271,7 @@ var Products = function () {
   };
 
   this.update = function (req, resp, params) {
+    console.log("update");
     var self = this;
       
     geddy.model.Product.first(params.id, function(err, product) {

@@ -1,7 +1,10 @@
 <div class = "hero-unit">
   <h2>Dashboard</h2>
 </div>
-<div class="span10"> <%- linkTo('Add a new Product', addProductPath, {class: 'btn btn-primary ', style : 'margin-bottom: 45px;  float: right; margin-right:20px;'}); %></div>
+<div class="span10"> 
+  <%- linkTo('Add a new Product', addProductPath, {class: 'btn btn-primary ', style : 'margin-bottom: 45px;  float: right; margin-right:20px;'}); %>
+  <%- linkTo('Statistic', '/genReport', {class: 'btn btn-primary ', style : 'margin-bottom: 45px;  float: right; margin-right:20px;'}); %>
+</div>
 
 <div id="products-list" style="clear:right">
     <% if (products) { %>
@@ -42,7 +45,8 @@
         <% } }
         else if(products[i].expiryDate < currentDate){ %>
         <div class = "item-warning-bubble">
-            <span>Item has expired!</span>
+            <span>Item has expired!</span></br>
+            <span><%- linkTo( 'remove/update', editProductPath(products[i].id), {}) %></span>
             </div>
         <% } %>
     </div>
