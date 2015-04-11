@@ -16,9 +16,9 @@ var init = function(cb) {
     
       cartItems=[];
       report = [];
-<<<<<<< HEAD
+
       wishList = [];
-=======
+
     
     /* Stub - To be pushed to DB for real-time */
     billedItems = [
@@ -71,7 +71,6 @@ var init = function(cb) {
         {productId : '100003', productName : 'Tresemme', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '30/3/2014', quantity : 38},
         {productId : '100002', productName : 'Dove', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '30/3/2014', quantity : 18}
     ];
->>>>>>> e7f21f6630b3b20ec373ba1ef5bfcb7b26272179
 };
 
 exports.init = init;
