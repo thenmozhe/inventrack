@@ -7,7 +7,8 @@ var Product = function () {
     isOrderPlaced: {type: 'boolean'},
     productId : {type : 'number'} ,
     lastBilledOn : {type: 'string'} ,
-    lastBilledCount : {type : 'number'}
+    lastBilledCount : {type : 'number'},
+    category : {type : 'string'}
   });
   
   this.validatesWithFunction('quantity', function (quantity) {

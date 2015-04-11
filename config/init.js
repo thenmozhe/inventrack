@@ -16,6 +16,7 @@ var init = function(cb) {
     
       cartItems=[];
       report = [];
+      wishList = [];
 };
 
 exports.init = init;
