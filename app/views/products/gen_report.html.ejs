@@ -4,95 +4,95 @@
 <h4 style = " margin-top : 20px;">Fast moving item</h4>
 <div style="clear:both;margin-top:0px;background:#fff">
 <% if(report.fastMovingItem){%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Name :
-		<span style="font-weight:normal"><%= report.fastMovingItem.name %></span>
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Name :
+        <span style="font-weight:normal"><%= report.fastMovingItem.name %></span>
+      </div>
+    </div>
 
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Id :
-		<span style="font-weight:normal"><%= report.fastMovingItem.productId %></span>
-	 	</div>
-	 </div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Id :
+        <span style="font-weight:normal"><%= report.fastMovingItem.productId %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Total no.of quantity billed today :
-		<span style="font-weight:normal"><%= report.fastMovingItem.lastBilledCount %></span>
-	 	</div>
-	 </div>
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Total no.of quantity billed today :
+        <span style="font-weight:normal"><%= report.fastMovingItem.lastBilledCount %></span>
+        </div>
+     </div>
 <%}else{%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   products yet to be sold!
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       products yet to be sold!
+      </div>
+    </div>
 <%}%>
 </div>
 
 <h4 style = " margin-top : 20px;">Slow moving item</h4>
 <div style="clear:both;margin-top:0px;background:#fff; position: relative;">
 <% if(report.slowMovingItem){%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Name :
-		<span style="font-weight:normal"><%= report.slowMovingItem.name %></span>
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Name :
+        <span style="font-weight:normal"><%= report.slowMovingItem.name %></span>
+      </div>
+    </div>
 
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Product Id :
-		<span style="font-weight:normal"><%= report.slowMovingItem.productId %></span>
-	 	</div>
-	 </div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Product Id :
+        <span style="font-weight:normal"><%= report.slowMovingItem.productId %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   Total no.of quantity billed today :
-		<span style="font-weight:normal"><%= report.slowMovingItem.lastBilledCount %></span>
-	 	</div>
-	 </div>
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       Total no.of quantity billed today :
+        <span style="font-weight:normal"><%= report.slowMovingItem.lastBilledCount %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   	Remaining Quantity : 
-		<span style="font-weight:normal"><%= report.slowMovingItem.quantity %></span>
-	 	</div>
-	 </div>
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+        Remaining Quantity : 
+        <span style="font-weight:normal"><%= report.slowMovingItem.quantity %></span>
+        </div>
+     </div>
 
-	 <div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   	Expires on : 
-		<span style="font-weight:normal"><%= report.slowMovingItem.expiryDate %></span>
-	 	</div>
-	 </div>
-	 <% 
-	 	var currentDate = new Date();
+     <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+        Expires on : 
+        <span style="font-weight:normal"><%= report.slowMovingItem.expiryDate %></span>
+        </div>
+     </div>
+     <% 
+        var currentDate = new Date();
         var prLife = Math.ceil((report.slowMovingItem.expiryDate.getTime() - currentDate.getTime())/(1000*3600*24));
         var prSellingRatio = report.slowMovingItem.lastBilledCount;
         var prQuantity = report.slowMovingItem.quantity;
         var dangerRatio =  Math.ceil(report.slowMovingItem.quantity / prLife);
-    	if(dangerRatio > report.slowMovingItem.lastBilledCount){%>
-    		<div class = "item-warning-bubble item-warning-bubble-animation">
-        		<span style="padding:0">Attention...</span>
-        	</div>
+        if(dangerRatio > report.slowMovingItem.lastBilledCount){%>
+            <div class = "item-warning-bubble item-warning-bubble-animation">
+                <span style="padding:0">Attention...</span>
+            </div>
         <%}%>
      <div class="row">
-	  	<div class="span12" style="padding:10px;font-weight:bold">
-	   	You've to sell <%= dangerRatio %> products per day. It expires in <%=prLife %> days!!</span>
-	 	</div>
-	 </div>
+        <div class="span12" style="padding:10px;font-weight:bold">
+        You've to sell <%= dangerRatio %> products per day. It expires in <%=prLife %> days!!</span>
+        </div>
+     </div>
 
 <%}else{%>
-	<div class="row">
-	  <div class="span12" style="padding:10px;font-weight:bold">
-	   No more products billed!!
-	  </div>
-	</div>
+    <div class="row">
+      <div class="span12" style="padding:10px;font-weight:bold">
+       No more products billed!!
+      </div>
+    </div>
 <%}%>
 </div>
 <br/>
