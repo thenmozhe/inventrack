@@ -72,7 +72,7 @@ a{
 }
 
 .section-icon{
-  margin: 100px;
+    margin: 100px 50px 100px 25px;
   background: white;
   border: 20px solid white;
   border-radius: 10px;
