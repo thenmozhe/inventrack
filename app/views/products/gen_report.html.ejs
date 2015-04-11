@@ -102,18 +102,55 @@
 <script>
 
 $(function () {
+    var productBrands = '<%- productBrands %>';
+    productBrands = JSON.parse(productBrands);
+    
+    
+    var getYoy = function(id){
+        var billedItems = '<%- billedItems %>';
+        var list = JSON.parse(billedItems);
+        
+        var quantity = 0;
+        
+        list.forEach(function(o){
+            if(o.dateSold.substring(o.dateSold.length-4, o.dateSold.length) == "2014"){
+                    if(o.productId == id){
+                        quantity += o.quantity;
+                    }
+                }
+                
+            });
+        return quantity;
+        }
+    
+    var getLast = function(id, noOfMonths){
+        var billedItems = '<%- billedItems %>';
+        var list = JSON.parse(billedItems);
+        
+        var quantity = 0;
+        
+        list.forEach(function(o){
+            if((parseInt((new Date()).getMonth()+1) - o.dateSold.split("/")[1].substring(0,2)) <= noOfMonths ){
+                    if(o.productId == id){
+                        quantity += o.quantity;
+                    }
+                }                
+            });
+        return quantity;
+    }
+    
     $('#container').highcharts({
         chart: {
             type: 'bar'
         },
         title: {
-            text: 'Trendz in previous year - Shampoo'
+            text: 'Sale Trends - Shampoo'
         },
         subtitle: {
-            text: ''
+            text: ' '
         },
         xAxis: {
-            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+            categories: ['YoY - 5 months', 'Last 3 months', 'Last 6 months'],
             title: {
                 text: null
             }
@@ -153,15 +190,32 @@ $(function () {
             enabled: false
         },
         series: [{
-            name: 'Year 1800',
-            data: [107, 31, 635, 203, 2]
+            name: productBrands[0].productName,
+            data: [getYoy(productBrands[0].productId), 
+                   getLast(productBrands[0].productId, 3), 
+                   getLast(productBrands[0].productId, 6)]
         }, {
-            name: 'Year 1900',
-            data: [133, 156, 947, 408, 6]
+            name: productBrands[1].productName,
+            data: [getYoy(productBrands[1].productId), 
+                   getLast(productBrands[1].productId, 3), 
+                   getLast(productBrands[1].productId, 6)]
         }, {
-            name: 'Year 2008',
-            data: [973, 914, 4054, 732, 34]
-        }]
+            name: productBrands[2].productName,
+            data: [getYoy(productBrands[2].productId), 
+                   getLast(productBrands[2].productId, 3), 
+                   getLast(productBrands[2].productId, 6)]
+        }, {
+            name: productBrands[3].productName,
+            data: [getYoy(productBrands[3].productId), 
+                   getLast(productBrands[3].productId, 3), 
+                   getLast(productBrands[3].productId, 6)]
+        }, {
+            name: productBrands[4].productName,
+            data: [getYoy(productBrands[4].productId), 
+                   getLast(productBrands[4].productId, 3), 
+                   getLast(productBrands[4].productId, 6)]
+            }]
     });
-});
+});   
+    
 </script>

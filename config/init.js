@@ -18,7 +18,16 @@ var init = function(cb) {
       report = [];
     
     /* Stub - To be pushed to DB for real-time */
-    billedItems = [
+    
+    var productBrands1 = [{productId : '100001', productName : 'Sunsilk'},
+                     {productId : '100002', productName : 'Dove'},
+                     {productId : '100003', productName : 'Tresemme'},
+                     {productId : '100004', productName : 'Garnier'},
+                     {productId : '100005', productName : 'Pantene'}];
+    
+    productBrands = JSON.stringify(productBrands1);
+    
+        var billedItems1 = [
         {productId : '100001', productName : 'Sunsilk', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '11/4/2014', quantity : 34},
         {productId : '100002', productName : 'Dove', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '11/4/2014', quantity : 23},
         {productId : '100003', productName : 'Tresemme', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '11/4/2014', quantity : 65},
@@ -68,6 +77,10 @@ var init = function(cb) {
         {productId : '100003', productName : 'Tresemme', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '30/3/2014', quantity : 38},
         {productId : '100002', productName : 'Dove', categoryId : 'C0001', categoryName : 'Shampoo', dateSold : '30/3/2014', quantity : 18}
     ];
+    
+    
+billedItems = JSON.stringify(billedItems1);
 };
+
 
 exports.init = init;
